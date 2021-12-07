@@ -2,9 +2,11 @@
   "name": "jest-training",
   "version": "1.0.0",
   "description": "Jest training project",
-  "main": "index.js",
+  "main": "index.ts",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "compile": "tsc",
+    "start": "npm run compile && node ./dist/index.js"
   },
   "repository": {
     "type": "git",
