@@ -6,7 +6,8 @@
   "scripts": {
     "test": "jest",
     "compile": "tsc",
-    "start": "npm run compile && node ./dist/index.js"
+    "start": "npm run compile && node ./dist/index.js",
+    "preinstall": "npx npm-force-resolutions"
   },
   "repository": {
     "type": "git",
@@ -19,7 +20,13 @@
   },
   "homepage": "https://github.com/macevedoinf/jest-training#readme",
   "dependencies": {
+    "npm-force-resolutions": "0.0.10",
+    "sequelize": "^6.12.0-beta.1",
+    "sqlite3": "^5.0.2",
     "typescript": "^4.5.2"
+  },
+  "resolutions": {
+    "tar": "4.4.18"
   },
   "devDependencies": {
     "@babel/plugin-transform-modules-commonjs": "^7.16.0",

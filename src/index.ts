@@ -1,9 +1,43 @@
-import { sum, multiply, divide, minus } from './Math/mathFunctions';
+import { Model, Sequelize } from "sequelize/dist";
+import { showAddAlbum, showAllAlbums } from "./Albums";
+import { Database } from "./Database";
 
-const a = 2;
-const b = 3;
+const readline = require("readline").createInterface({
+  input: process.stdin,
+  output: process.stdout,
+});
 
-console.log(`This is a SUM(${a}, ${b}) test`, sum(a, b));
-console.log(`This is a MULTIPLY(${a}, ${b}) test`, multiply(a, b));
-console.log(`This is a MINUS(${a}, ${b}) test`, minus(a, b));
-console.log(`This is a DIVIDE(${a}, ${b}) test`, divide(a, b));
+const database = Database.initialize();
+
+const showMenu = (sequelize: Sequelize | null) => {
+  console.log("=============================");
+  console.log("===========  MENU  ==========");
+  console.log("=============================");
+  console.log("  1.- Add a new album");
+  console.log("  2.- Get all albums");
+  readline.question(`Input option number: `, (input: string) =>
+    selectOption(sequelize, parseInt(input, 10))
+  );
+};
+
+const selectOption = function (
+  sequelize: Sequelize | null,
+  optionNumber: number
+) {
+  switch (optionNumber) {
+    case 1:
+      return showAddAlbum(sequelize, readline).then(() => {
+        showMenu(sequelize);
+      });
+    case 2:
+      return showAllAlbums(sequelize).then(() => {
+        showMenu(sequelize);
+      });
+    default:
+      showMenu(sequelize);
+  }
+};
+
+database.connectToDatabase().then((sequelize: Sequelize | null) => {
+  showMenu(sequelize);
+});
