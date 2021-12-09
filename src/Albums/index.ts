@@ -1,4 +1,4 @@
-import { Album } from "@src/Database/Structure/Models/Albums";
+import { Album } from "@src/Database/Structure/Models/Album";
 import { Sequelize, Model } from "sequelize";
 
 export const showAddAlbum = (sequelize: Sequelize | null, readline: any) => {
@@ -16,13 +16,11 @@ export const showAddAlbum = (sequelize: Sequelize | null, readline: any) => {
         readline.question("Input album picture: ", async (input: string) => {
           albumPicture = input === "" ? null : input;
 
-          if (sequelize) {
-            await sequelize.models.Album.create({
-              albumName,
-              albumYear,
-              albumPicture,
-            });
-          }
+          await sequelize?.models.Album.create({
+            albumName,
+            albumYear,
+            albumPicture,
+          });
 
           resolve();
         });

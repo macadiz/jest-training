@@ -1,8 +1,8 @@
 import { Sequelize } from "sequelize";
-import { init as AlbumInit } from "./Models/Albums";
+import { Album } from "./Models/Album";
 
 export const modelInitialization = async (sequelize: Sequelize) => {
-    AlbumInit(sequelize);
+    Album.initialize(sequelize);
 
     return sequelize;
 }
